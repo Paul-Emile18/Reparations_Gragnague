@@ -7,115 +7,90 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(244, 244, 244, 0.8)), url('images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             color: #333;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        h1 {
-            font-size: 2.5em;
-            margin-top: 20px;
-        }
-        h2 {
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        .principale {
             display: flex;
+            justify-content: center;
             align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Empêche les barres de défilement */
+        }
+
+        .form-container {
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.3s;
-        }
-        .principale:hover {
-            transform: scale(1.02);
-        }
-        .principale .img {
-            flex: 1;
-            margin-right: 20px;
-        }
-        .principale .img img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
-        .principale div {
-            flex: 2;
-        }
-        .admin-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            margin-top: 20px;
-        }
-        .admin-container h2 {
-            margin-bottom: 20px;
-        }
-        .admin-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .admin-container input {
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
+            max-width: 600px; /* Contrôle la largeur du formulaire */
+            box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+        }
+
+        h2 {
+            font-size: 2.2em;
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #555;
+            display: block;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
         }
-        .admin-container button {
+
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
             background-color: #28a745;
-            color: #fff;
-            padding: 10px 15px;
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
+            font-size: 1.2em;
             cursor: pointer;
-            margin-right: 10px;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: background-color 0.3s ease;
         }
-        .admin-container button:hover {
+
+        button:hover {
             background-color: #218838;
-            transform: translateY(-2px);
         }
-        #adminContent {
-            display: none;
-        }
-    
-        /* Styles pour les écrans de téléphone */
+
         @media screen and (max-width: 768px) {
-            body {
-                padding: 10px;
+            .form-container {
+                padding: 20px;
             }
-            h1 {
-                font-size: 1.8em; /* Réduire les tailles de police */
-            }
+
             h2 {
-                font-size: 1.2em;
+                font-size: 1.6em;
             }
-            .principale {
-                flex-direction: column; /* Empile les éléments verticalement */
-                text-align: center;
-            }
-            .principale .img {
-                margin-right: 0;
-                margin-bottom: 10px; /* Ajoute de l'espace entre les images et le texte */
-            }
-            .admin-container {
-                padding: 15px;
-            }
-            .admin-container input, .admin-container button {
-                width: 100%; /* Étendre les champs sur toute la largeur */
+
+            input, textarea, button {
+                padding: 10px;
             }
         }
     </style>
-    
 </head>
 <body>
     <div class="form-container">
@@ -133,12 +108,10 @@
             <button type="submit">Envoyer</button>
         </form>
     </div>
-    <!-- Ajouter le SDK Firebase -->
+    
     <script type="module">
-        // Importer les fonctions nécessaires du SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-        // Configuration Firebase (votre configuration spécifique)
         const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
             authDomain: "reparations-d4b81.firebaseapp.com",
@@ -148,38 +121,35 @@
             messagingSenderId: "445121565052",
             appId: "1:445121565052:web:4d549a853bddba200d14f9"
         };
-        // Initialiser Firebase
+
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        // Gestion de la soumission du formulaire
         const form = document.getElementById("contactForm");
+
         form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Empêcher le rechargement de la page
-            // Récupérer les valeurs du formulaire
+            e.preventDefault();
             const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value || null; // Email facultatif
+            const email = document.getElementById("email").value || null;
             const message = document.getElementById("messageField").value;
-            // Référence à la base de données
+
             const messagesRef = ref(database, "messages");
-            // Créer l'objet de message
             const messageData = {
                 name: name,
                 message: message,
                 date: new Date().toLocaleDateString(),
                 time: new Date().toLocaleTimeString()
             };
-            // Ajouter l'email s'il est fourni
+
             if (email) {
                 messageData.email = email;
             }
-            // Ajouter une nouvelle entrée
+
             const newMessageRef = push(messagesRef);
             set(newMessageRef, messageData)
             .then(() => {
                 alert("Message envoyé avec succès !");
-                form.reset(); // Réinitialiser le formulaire
-                // Redirection après l'envoi
-                window.location.href = "home.html"; // Changez l'URL pour votre page de confirmation
+                form.reset();
+                window.location.href = "home.html";
             })
             .catch((error) => {
                 console.error("Erreur lors de l'envoi du message : ", error);
@@ -189,8 +159,6 @@
     </script>
 </body>
 </html>
-
-
 
 
 
