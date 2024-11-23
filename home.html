@@ -168,7 +168,6 @@
     <h2>Robot de cuisine <br> Lecteur CD <br> Thermomix <br> Plaque de cuisson <br>voitures télécomandées
     <br>calculatrice <br>et beaucoup d'autres...</h2>
 
-    <!-- Section Accès Administrateur -->
     <div class="admin-container" id="adminContainer">
         <h2>Accès Administrateur</h2>
         <label for="adminPassword">Mot de passe :</label>
@@ -187,13 +186,12 @@
             <button id="changePasswordButton">Changer le mot de passe</button>
         </div>
     </div>
-
     <script type="module">
         // Importer Firebase SDK
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getDatabase, ref, get, remove, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
         // Initialiser Firebase
-        firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
             authDomain: "reparations-d4b81.firebaseapp.com",
             databaseURL: "https://reparations-d4b81-default-rtdb.firebaseio.com",
@@ -202,8 +200,7 @@
             messagingSenderId: "445121565052",
             appId: "1:445121565052:web:4d549a853bddba200d14f9"
         };
-
-    const app = initializeApp(firebaseConfig);
+        const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     // Fonction pour récupérer et afficher les messages
     function displayMessages() {
