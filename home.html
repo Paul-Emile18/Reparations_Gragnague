@@ -190,6 +190,7 @@
         // Importer Firebase SDK
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getDatabase, ref, get, remove, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+    
         // Initialiser Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
@@ -201,62 +202,67 @@
             appId: "1:445121565052:web:4d549a853bddba200d14f9"
         };
         const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    // Fonction pour récupérer et afficher les messages
-    function displayMessages() {
-        const messagesRef = ref(db, 'messages');
-        get(messagesRef).then((snapshot) => {
-            const adminMessagesContainer = document.getElementById('adminMessages');
-            adminMessagesContainer.innerHTML = '';
-            if (snapshot.exists()) {
-                const messages = snapshot.val();
-                for (let id in messages) {
-                    const msg = messages[id];
-                    adminMessagesContainer.innerHTML += `
-                        <div id="message-${id}">
-                            <strong>Nom :</strong> ${msg.name} <br>
-                            <strong>Email :</strong> ${msg.email} <br>
-                            <strong>Message :</strong> ${msg.message} <br>
-                            <strong>Date :</strong> ${msg.date} <br>
-                            <strong>Heure :</strong> ${msg.time} <br>
-                            <button onclick="deleteMessage('${id}')">Supprimer</button>
-                            <hr>
-                        </div>
-                    `;
+        const db = getDatabase(app);
+    
+        // Fonction pour récupérer et afficher les messages avec la catégorie
+        function displayMessages() {
+            const messagesRef = ref(db, 'messages');
+            get(messagesRef).then((snapshot) => {
+                const adminMessagesContainer = document.getElementById('adminMessages');
+                adminMessagesContainer.innerHTML = '';
+                if (snapshot.exists()) {
+                    const messages = snapshot.val();
+                    for (let id in messages) {
+                        const msg = messages[id];
+                        adminMessagesContainer.innerHTML += `
+                            <div id="message-${id}">
+                                <strong>Nom :</strong> ${msg.name} <br>
+                                <strong>Email :</strong> ${msg.email} <br>
+                                <strong>Catégorie :</strong> ${msg.device || 'Non spécifiée'} <br>
+                                <strong>Message :</strong> ${msg.message} <br>
+                                <strong>Date :</strong> ${msg.date} <br>
+                                <strong>Heure :</strong> ${msg.time} <br>
+                                <button onclick="deleteMessage('${id}')">Supprimer</button>
+                                <hr>
+                            </div>
+                        `;
+                    }
+                } else {
+                    adminMessagesContainer.innerHTML = '<p>Aucun message trouvé.</p>';
                 }
-            } else {
-                adminMessagesContainer.innerHTML = '<p>Aucun message trouvé.</p>';
-            }
-        }).catch((error) => {
-            console.error("Erreur lors de la récupération des messages :", error);
-        });
-    }
-    // Fonction pour supprimer un message
-    window.deleteMessage = function(id) { // Ajouter la fonction à l'objet global pour le rendre accessible dans le DOM
-        const messageRef = ref(db, `messages/${id}`);
-        remove(messageRef)
-            .then(() => {
-                alert("Message supprimé.");
-                const messageElement = document.getElementById(`message-${id}`);
-                if (messageElement) {
-                    messageElement.remove(); // Supprime le message de l'interface immédiatement
-                }
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la suppression :", error);
+            }).catch((error) => {
+                console.error("Erreur lors de la récupération des messages :", error);
             });
-    };
-    // Connexion administrateur
-    document.getElementById('adminButton').addEventListener('click', function() {
-        const password = document.getElementById('adminPassword').value;
-        const correctPassword = "admin123"; // Mot de passe par défaut
-        if (password === correctPassword) {
-            document.getElementById('adminContent').style.display = 'block';
-            displayMessages();
-        } else {
-            alert("Mot de passe incorrect.");
         }
-    });
-</script>
+    
+        // Fonction pour supprimer un message
+        window.deleteMessage = function(id) { // Ajouter la fonction à l'objet global pour le rendre accessible dans le DOM
+            const messageRef = ref(db, `messages/${id}`);
+            remove(messageRef)
+                .then(() => {
+                    alert("Message supprimé.");
+                    const messageElement = document.getElementById(`message-${id}`);
+                    if (messageElement) {
+                        messageElement.remove(); // Supprime le message de l'interface immédiatement
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de la suppression :", error);
+                });
+        };
+    
+        // Connexion administrateur
+        document.getElementById('adminButton').addEventListener('click', function() {
+            const password = document.getElementById('adminPassword').value;
+            const correctPassword = "admin123"; // Mot de passe par défaut
+            if (password === correctPassword) {
+                document.getElementById('adminContent').style.display = 'block';
+                displayMessages();
+            } else {
+                alert("Mot de passe incorrect.");
+            }
+        });
+    </script>
+    
 </body>
 </html>

@@ -16,7 +16,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden; /* Empêche les barres de défilement */
+            overflow: hidden;
         }
 
         .form-container {
@@ -25,8 +25,8 @@
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 600px; /* Contrôle la largeur du formulaire */
-            box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur */
+            max-width: 600px;
+            box-sizing: border-box;
         }
 
         h2 {
@@ -43,7 +43,7 @@
             display: block;
         }
 
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             margin-bottom: 20px;
@@ -53,7 +53,7 @@
             transition: border-color 0.3s ease;
         }
 
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             border-color: #007bff;
             outline: none;
         }
@@ -87,7 +87,7 @@
                 font-size: 1.6em;
             }
 
-            input, textarea, button {
+            input, textarea, select, button {
                 padding: 10px;
             }
         }
@@ -103,18 +103,40 @@
             <label for="email">Email (facultatif) :</label>
             <input type="email" id="email" name="email">
 
+            <label for="device">Appareil à réparer :</label>
+            <select id="device" name="device" required>
+                <option value="" disabled selected>Choisissez un appareil</option>
+                <option value="message de soutien">message de soutien</option>
+                <option value="ordinateur">Ordinateur</option>
+                <option value="smartphone">Smartphone</option>
+                <option value="tablette">Tablette</option>
+                <option value="télévision">Télévision</option>
+                <option value="imprimante">Imprimante</option>
+                <option value="console-jeu">Console de jeu</option>
+                <option value="écouteurs">Écouteurs</option>
+                <option value="appareil-photo">Appareil photo</option>
+                <option value="four-micro-ondes">Four à micro-ondes</option>
+                <option value="lave-linge">Lave-linge</option>
+                <option value="climatiseur">Climatiseur</option>
+                <option value="aspirateur">Aspirateur</option>
+                <option value="montre-connectée">Montre connectée</option>
+                <option value="enceinte-bluetooth">Enceinte Bluetooth</option>
+                <option value="drone">Drone</option>
+                <option value="routeur">Routeur</option>
+                <option value="autre">Autre</option>
+            </select>
+
             <label for="messageField">Message :</label>
             <textarea id="messageField" name="message" rows="4" required></textarea>
 
             <button type="submit">Envoyer</button>
         </form>
     </div>
-    
+
     <script type="module">
-        // Importer les fonctions nécessaires du SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-        // Configuration Firebase (votre configuration spécifique)
+
         const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
             authDomain: "reparations-d4b81.firebaseapp.com",
@@ -124,38 +146,36 @@
             messagingSenderId: "445121565052",
             appId: "1:445121565052:web:4d549a853bddba200d14f9"
         };
-        // Initialiser Firebase
+
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
-        // Gestion de la soumission du formulaire
+
         const form = document.getElementById("contactForm");
         form.addEventListener("submit", function (e) {
-            e.preventDefault(); // Empêcher le rechargement de la page
-            // Récupérer les valeurs du formulaire
+            e.preventDefault();
             const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value || null; // Email facultatif
+            const email = document.getElementById("email").value || null;
+            const device = document.getElementById("device").value;
             const message = document.getElementById("messageField").value;
-            // Référence à la base de données
+
             const messagesRef = ref(database, "messages");
-            // Créer l'objet de message
             const messageData = {
                 name: name,
+                device: device,
                 message: message,
                 date: new Date().toLocaleDateString(),
                 time: new Date().toLocaleTimeString()
             };
-            // Ajouter l'email s'il est fourni
             if (email) {
                 messageData.email = email;
             }
-            // Ajouter une nouvelle entrée
+
             const newMessageRef = push(messagesRef);
             set(newMessageRef, messageData)
             .then(() => {
                 alert("Message envoyé avec succès !");
-                form.reset(); // Réinitialiser le formulaire
-                // Redirection après l'envoi
-                window.location.href = "home.html"; // Changez l'URL pour votre page de confirmation
+                form.reset();
+                window.location.href = "home.html";
             })
             .catch((error) => {
                 console.error("Erreur lors de l'envoi du message : ", error);
@@ -165,9 +185,6 @@
     </script>
 </body>
 </html>
-
-
-
 
 
 
