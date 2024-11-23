@@ -6,50 +6,116 @@
     <title>Formulaire de Contact</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(244, 244, 244, 0.8)), url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
             margin: 0;
             padding: 20px;
+            color: #333;
         }
-
-        .form-container {
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .principale {
+            display: flex;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .principale:hover {
+            transform: scale(1.02);
+        }
+        .principale .img {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .principale .img img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        .principale div {
+            flex: 2;
+        }
+        .admin-container {
             background-color: #fff;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+        .admin-container h2 {
             margin-bottom: 20px;
         }
-
-        h2 {
-            margin-bottom: 20px;
-        }
-
-        label {
+        .admin-container label {
             display: block;
             margin-bottom: 5px;
         }
-
-        input, textarea {
+        .admin-container input {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-
-        button {
+        .admin-container button {
             background-color: #28a745;
             color: #fff;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s, transform 0.2s;
         }
-
-        button:hover {
+        .admin-container button:hover {
             background-color: #218838;
+            transform: translateY(-2px);
+        }
+        #adminContent {
+            display: none;
+        }
+    
+        /* Styles pour les écrans de téléphone */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8em; /* Réduire les tailles de police */
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .principale {
+                flex-direction: column; /* Empile les éléments verticalement */
+                text-align: center;
+            }
+            .principale .img {
+                margin-right: 0;
+                margin-bottom: 10px; /* Ajoute de l'espace entre les images et le texte */
+            }
+            .admin-container {
+                padding: 15px;
+            }
+            .admin-container input, .admin-container button {
+                width: 100%; /* Étendre les champs sur toute la largeur */
+            }
         }
     </style>
+    
 </head>
 <body>
     <div class="form-container">
