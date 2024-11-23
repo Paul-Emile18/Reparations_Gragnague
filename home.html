@@ -88,7 +88,35 @@
         #adminContent {
             display: none;
         }
+    
+        /* Styles pour les écrans de téléphone */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8em; /* Réduire les tailles de police */
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .principale {
+                flex-direction: column; /* Empile les éléments verticalement */
+                text-align: center;
+            }
+            .principale .img {
+                margin-right: 0;
+                margin-bottom: 10px; /* Ajoute de l'espace entre les images et le texte */
+            }
+            .admin-container {
+                padding: 15px;
+            }
+            .admin-container input, .admin-container button {
+                width: 100%; /* Étendre les champs sur toute la largeur */
+            }
+        }
     </style>
+    
 </head>
 <body>
     <header>
