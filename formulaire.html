@@ -111,10 +111,11 @@
     </div>
     
     <script type="module">
+        // Importer les fonctions nécessaires du SDK Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-
-        firebaseConfig = {
+        // Configuration Firebase (votre configuration spécifique)
+        const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
             authDomain: "reparations-d4b81.firebaseapp.com",
             databaseURL: "https://reparations-d4b81-default-rtdb.firebaseio.com",
@@ -123,35 +124,38 @@
             messagingSenderId: "445121565052",
             appId: "1:445121565052:web:4d549a853bddba200d14f9"
         };
-
+        // Initialiser Firebase
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
+        // Gestion de la soumission du formulaire
         const form = document.getElementById("contactForm");
-
         form.addEventListener("submit", function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Empêcher le rechargement de la page
+            // Récupérer les valeurs du formulaire
             const name = document.getElementById("name").value;
-            const email = document.getElementById("email").value || null;
+            const email = document.getElementById("email").value || null; // Email facultatif
             const message = document.getElementById("messageField").value;
-
+            // Référence à la base de données
             const messagesRef = ref(database, "messages");
+            // Créer l'objet de message
             const messageData = {
                 name: name,
                 message: message,
                 date: new Date().toLocaleDateString(),
                 time: new Date().toLocaleTimeString()
             };
-
+            // Ajouter l'email s'il est fourni
             if (email) {
                 messageData.email = email;
             }
-
+            // Ajouter une nouvelle entrée
             const newMessageRef = push(messagesRef);
             set(newMessageRef, messageData)
             .then(() => {
                 alert("Message envoyé avec succès !");
-                form.reset();
-                window.location.href = "home.html";
+                form.reset(); // Réinitialiser le formulaire
+                // Redirection après l'envoi
+                window.location.href = "home.html"; // Changez l'URL pour votre page de confirmation
             })
             .catch((error) => {
                 console.error("Erreur lors de l'envoi du message : ", error);
