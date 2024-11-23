@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reparations@gragnague</title>
+    <link rel="icon" href="images/logo.png" type="image/png" sizes="64x64">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
@@ -201,7 +202,7 @@
               messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
              appId: process.env.FIREBASE_APP_ID
             };
-            
+
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
     // Fonction pour récupérer et afficher les messages
