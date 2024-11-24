@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="icon" href="images/logo.png" type="image/png" sizes="64x64">
     <link rel="stylesheet" href="style.css">
     <style>
+
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(244, 244, 244, 0.8)), url('images/background.jpg') no-repeat center center fixed;
@@ -15,18 +17,42 @@
             padding: 20px;
             color: #333;
         }
+
         header {
             text-align: center;
             margin-bottom: 30px;
         }
+
         h1 {
             font-size: 2.5em;
             margin-top: 20px;
         }
+
         h2 {
             font-size: 1.5em;
             margin-bottom: 15px;
         }
+
+        /* Menu de navigation */
+        nav {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #28a745;
+            text-decoration: none;
+            font-size: 1.2em;
+            margin: 0 15px;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #218838;
+        }
+
         .principale {
             display: flex;
             align-items: center;
@@ -37,20 +63,25 @@
             margin-bottom: 20px;
             transition: transform 0.3s;
         }
+
         .principale:hover {
             transform: scale(1.02);
         }
+
         .principale .img {
             flex: 1;
             margin-right: 20px;
         }
+
         .principale .img img {
             max-width: 100%;
             border-radius: 8px;
         }
+
         .principale div {
             flex: 2;
         }
+
         .admin-container {
             background-color: #fff;
             padding: 20px;
@@ -58,13 +89,16 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin-top: 20px;
         }
+
         .admin-container h2 {
             margin-bottom: 20px;
         }
+
         .admin-container label {
             display: block;
             margin-bottom: 5px;
         }
+
         .admin-container input {
             width: 100%;
             padding: 10px;
@@ -72,6 +106,7 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         .admin-container button {
             background-color: #28a745;
             color: #fff;
@@ -82,47 +117,66 @@
             margin-right: 10px;
             transition: background-color 0.3s, transform 0.2s;
         }
+
         .admin-container button:hover {
             background-color: #218838;
             transform: translateY(-2px);
         }
+
         #adminContent {
             display: none;
         }
-    
+
         /* Styles pour les écrans de téléphone */
         @media screen and (max-width: 768px) {
             body {
                 padding: 10px;
             }
+
             h1 {
-                font-size: 1.8em; /* Réduire les tailles de police */
+                font-size: 1.8em;
+                /* Réduire les tailles de police */
             }
+
             h2 {
                 font-size: 1.2em;
             }
+
             .principale {
-                flex-direction: column; /* Empile les éléments verticalement */
+                flex-direction: column;
+                /* Empile les éléments verticalement */
                 text-align: center;
             }
+
             .principale .img {
                 margin-right: 0;
-                margin-bottom: 10px; /* Ajoute de l'espace entre les images et le texte */
+                margin-bottom: 10px;
+                /* Ajoute de l'espace entre les images et le texte */
             }
+
             .admin-container {
                 padding: 15px;
             }
-            .admin-container input, .admin-container button {
-                width: 100%; /* Étendre les champs sur toute la largeur */
+
+            .admin-container input,
+            .admin-container button {
+                width: 100%;
+                /* Étendre les champs sur toute la largeur */
             }
         }
     </style>
-    
 </head>
+
 <body>
     <header>
         <h1>Bienvenue !</h1>
-        <h2>Sachez que ce site est entièrement fait par moi. <br>Veuillez m'excuser pour les problèmes. <br>Des idées ? Dites-le moi !</h2>
+        <h2>Sachez que ce site est entièrement fait par moi. <br>Veuillez m'excuser pour les problèmes. <br>Des idées ?
+            Dites-le moi !</h2>
+
+        <!-- Menu de navigation avec le lien "À propos" -->
+        <nav>
+            <a href="about.html">Qui suis-je ?</a> <!-- Lien vers la page "À propos" -->
+        </nav>
     </header>
 
     <h1>Faire réparer un appareil :</h1>
@@ -130,8 +184,8 @@
         <div class="img"><img src="images/reparation.webp" alt=""></div>
         <div>
             <h2>Grâce à ce site, envoyez-moi un formulaire expliquant <br> le problème,
-            et je vous contacterai pour récupérer <br> l'appareil et le réparer. <br>
-            Pour plus d'infos, contactez-moi.</h2>
+                et je vous contacterai pour récupérer <br> l'appareil et le réparer. <br>
+                Pour plus d'infos, contactez-moi.</h2>
             <a href="formulaire.html"><button> Cliquez ici </button></a>
         </div>
     </div>
@@ -141,8 +195,9 @@
         <div class="img"><img src="images/3D.jpg" alt=""></div>
         <div>
             <h2>Une pièce cassée et introuvable ? <br> Voici la solution ! <br>
-            Contactez-moi et faites modéliser et <br> imprimer votre pièce sur mesure ! <br>
-            <a href="formulaire.html"><button> Cliquez ici </button></a></h2>
+                Contactez-moi et faites modéliser et <br> imprimer votre pièce sur mesure ! <br>
+                <a href="formulaire.html"><button> Cliquez ici </button></a>
+            </h2>
         </div>
     </div>
 
@@ -151,22 +206,27 @@
     <a href="formulaire.html"><button> envoyer un message </button></a></h2>
 
     <h1>Réparations effectuées :</h1>
-    <h2><div class="principale">Les pompes de piscine : 6 réparées avec succès.</div></h2>
+    <h2>
+        <div class="principale">Les pompes de piscine : 6 réparées avec succès.</div>
+    </h2>
 
     <div class="principale">
         <div class="img"><img src="images/pompe.jpg" alt=""></div>
         <div>
             <h2>Les pompes de piscine sont chères et tombent facilement
-            en panne à cause de l'eau. <br> Il suffit de les démonter et
-            de changer les roulements, et elles repartent pour 3-4 ans ! <br>
-            RÉSULTAT : économisez jusqu'à 500 euros !</h2>
+                en panne à cause de l'eau. <br> Il suffit de les démonter et
+                de changer les roulements, et elles repartent pour 3-4 ans ! <br>
+                RÉSULTAT : économisez jusqu'à 500 euros !</h2>
         </div>
     </div>
 
-    <h2><div class="principale">Électroménagers</div></h2>
+    <h2>
+        <div class="principale">Électroménagers</div>
+    </h2>
     <h2>Voici une liste rapide des autres appareils :</h2>
     <h2>Robot de cuisine <br> Lecteur CD <br> Thermomix <br> Plaque de cuisson <br>voitures télécomandées
-    <br>calculatrice <br>et beaucoup d'autres...</h2>
+        <br>calculatrice <br>et beaucoup d'autres...
+    </h2>
 
     <div class="admin-container" id="adminContainer">
         <h2>Accès Administrateur</h2>
@@ -190,7 +250,7 @@
         // Importer Firebase SDK
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js";
         import { getDatabase, ref, get, remove, child } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
-    
+
         // Initialiser Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB5q89tynS7J74xa6W8zbwZflpU98uxRag",
@@ -203,7 +263,7 @@
         };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
-    
+
         // Fonction pour récupérer et afficher les messages avec la catégorie
         function displayMessages() {
             const messagesRef = ref(db, 'messages');
@@ -234,9 +294,9 @@
                 console.error("Erreur lors de la récupération des messages :", error);
             });
         }
-    
+
         // Fonction pour supprimer un message
-        window.deleteMessage = function(id) { // Ajouter la fonction à l'objet global pour le rendre accessible dans le DOM
+        window.deleteMessage = function (id) { // Ajouter la fonction à l'objet global pour le rendre accessible dans le DOM
             const messageRef = ref(db, `messages/${id}`);
             remove(messageRef)
                 .then(() => {
@@ -250,9 +310,9 @@
                     console.error("Erreur lors de la suppression :", error);
                 });
         };
-    
+
         // Connexion administrateur
-        document.getElementById('adminButton').addEventListener('click', function() {
+        document.getElementById('adminButton').addEventListener('click', function () {
             const password = document.getElementById('adminPassword').value;
             const correctPassword = "admin123"; // Mot de passe par défaut
             if (password === correctPassword) {
@@ -263,6 +323,7 @@
             }
         });
     </script>
-    
+
 </body>
+
 </html>

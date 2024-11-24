@@ -78,17 +78,47 @@
             background-color: #218838;
         }
 
+        /* Mobile et tablettes */
         @media screen and (max-width: 768px) {
+            body {
+                height: auto;
+                padding: 10px;
+            }
+
             .form-container {
                 padding: 20px;
+                width: 90%;
             }
 
             h2 {
-                font-size: 1.6em;
+                font-size: 1.8em;
             }
 
             input, textarea, select, button {
                 padding: 10px;
+            }
+
+            label, input, textarea, select {
+                font-size: 1em;
+            }
+        }
+
+        /* Petits appareils (téléphones très petits) */
+        @media screen and (max-width: 480px) {
+            .form-container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            input, textarea, select, button {
+                padding: 8px;
+            }
+
+            button {
+                font-size: 1em;
             }
         }
     </style>
@@ -98,15 +128,15 @@
         <h2>Formulaire de Contact</h2>
         <form id="contactForm">
             <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required aria-required="true">
 
             <label for="email">Email (facultatif) :</label>
             <input type="email" id="email" name="email">
 
             <label for="device">Appareil à réparer :</label>
-            <select id="device" name="device" required>
+            <select id="device" name="device" required aria-required="true">
                 <option value="" disabled selected>Choisissez un appareil</option>
-                <option value="message de soutien">message de soutien</option>
+                <option value="message de soutien">Message de soutien</option>
                 <option value="ordinateur">Ordinateur</option>
                 <option value="smartphone">Smartphone</option>
                 <option value="tablette">Tablette</option>
@@ -127,7 +157,7 @@
             </select>
 
             <label for="messageField">Message :</label>
-            <textarea id="messageField" name="message" rows="4" required></textarea>
+            <textarea id="messageField" name="message" rows="4" required aria-required="true"></textarea>
 
             <button type="submit">Envoyer</button>
         </form>
@@ -158,6 +188,12 @@
             const device = document.getElementById("device").value;
             const message = document.getElementById("messageField").value;
 
+            // Validation des champs requis
+            if (!name || !device || !message) {
+                alert("Veuillez remplir tous les champs obligatoires.");
+                return;
+            }
+
             const messagesRef = ref(database, "messages");
             const messageData = {
                 name: name,
@@ -175,7 +211,7 @@
             .then(() => {
                 alert("Message envoyé avec succès !");
                 form.reset();
-                window.location.href = "home.html";
+                window.location.href = "home.html"; // Redirection vers la page d'accueil après soumission
             })
             .catch((error) => {
                 console.error("Erreur lors de l'envoi du message : ", error);
@@ -185,7 +221,6 @@
     </script>
 </body>
 </html>
-
 
 
 
